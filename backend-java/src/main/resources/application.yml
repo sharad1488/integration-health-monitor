@@ -1,0 +1,18 @@
+server:
+  port: ${SERVER_PORT:8080}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+app:
+  logs:
+    directory: ${LOG_DIRECTORY:./sample-logs}
+  health:
+    window: ${HEALTH_WINDOW:15m}
+    minimum-sample-size: ${MINIMUM_SAMPLE_SIZE:5}
+    degraded-error-rate: ${DEGRADED_ERROR_RATE:0.05}
+    unhealthy-error-rate: ${UNHEALTHY_ERROR_RATE:0.20}
+    degraded-latency-ms: ${DEGRADED_LATENCY_MS:1000}
+    unhealthy-latency-ms: ${UNHEALTHY_LATENCY_MS:3000}
+    consecutive-failure-threshold: ${CONSECUTIVE_FAILURE_THRESHOLD:3}

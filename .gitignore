@@ -1,0 +1,25 @@
+node_modules/
+dist/
+*.local
+.vite/
+#############
+# Intellij
+#############
+.idea/
+.m2/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+#############
+# maven
+#############
+target/
+#############
+# package files
+#############
+*.jar
+*.war
+*.ear
+*.db
