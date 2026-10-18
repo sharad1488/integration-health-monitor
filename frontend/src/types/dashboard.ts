@@ -14,3 +14,12 @@ export interface ChartPoint { time: string; value: number; }
 export interface SelectedTrends { errorRate: ChartPoint[]; latency: ChartPoint[]; errorCodes: Array<{ code: string; label: string; count: number; color: string }>; }
 
 export interface ErrorCode { code: string; label: string; count: number; color: string; }
+export interface IntegrationInsight {
+  integrationName: string;
+  assessment: 'HEALTHY' | 'WARNING' | 'CRITICAL' | 'UNKNOWN';
+  summary: string;
+  keyFindings: string[];
+  possibleCauses: Array<{ cause: string; evidence: string; confidence: 'LOW' | 'MEDIUM' | 'HIGH' }>;
+  recommendedActions: Array<{ priority: 'HIGH' | 'MEDIUM' | 'LOW'; action: string }>;
+  dataLimitations: string[];
+}

@@ -4,7 +4,6 @@ import { InsightsPanel } from './components/InsightsPanel';
 import { IntegrationTable } from './components/IntegrationTable';
 import { SummaryCard } from './components/SummaryCard';
 import { TrendChart } from './components/TrendChart';
-import { ErrorBreakdown } from './components/ErrorBreakdown';
 import { Sidebar } from './components/Sidebar';
 import { TopBar } from './components/TopBar';
 import { dashboardApi } from './api/dashboardApi';
@@ -125,12 +124,12 @@ export default function App() {
               {logs.length === 0 ? <div className="logs-empty">No request logs are available for this integration.</div> : <div className="table-overflow"><Table size="small" aria-label={`Recent logs for ${selected.name}`} className="logs-table"><TableHead><TableRow><TableCell>Time</TableCell><TableCell>Status</TableCell><TableCell>Endpoint</TableCell><TableCell>Latency</TableCell><TableCell>Error</TableCell></TableRow></TableHead><TableBody>{logs.map(log => <TableRow key={log.requestId}><TableCell>{formatTime(log.timestamp)}</TableCell><TableCell><span className={`http-code ${isFailure(log.statusCode) ? 'failed' : 'success'}`}>{log.statusCode}</span></TableCell><TableCell>{log.path}</TableCell><TableCell>{formatLatency(log.latencyMs)}</TableCell><TableCell>{log.errorMessage ?? '—'}</TableCell></TableRow>)}</TableBody></Table></div>}
             </section>}
           </section>
-          <InsightsPanel integrations={rows} selectedId={selectedId} />
+          <InsightsPanel selected={selected} />
           <section className="charts-grid" id="trends">
             {trendError && <Alert severity="warning" className="trend-error">Selected integration details are partially unavailable: {trendError}</Alert>}
             <TrendChart title={`Error rate · ${selected?.name ?? 'Integration'}`} data={trends?.errorRate ?? []} color="#ef4444" suffix="%" percent />
             <TrendChart title={`Latency · ${selected?.name ?? 'Integration'}`} data={trends?.latency ?? []} color="#f59e0b" suffix=" ms" />
-            <ErrorBreakdown items={trends?.errorCodes ?? []} integration={selected?.name ?? 'Integration'} />
+            {/* <ErrorBreakdown items={trends?.errorCodes ?? []} integration={selected?.name ?? 'Integration'} /> */}
           </section>
         </div>
         <footer>Authoritative health status is calculated by Java · All displayed records are seeded demonstration data</footer>

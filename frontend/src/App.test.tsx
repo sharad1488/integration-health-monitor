@@ -36,9 +36,9 @@ describe('Integration Health dashboard', () => {
     expect(screen.getByRole('status')).toHaveTextContent(/Loading integration health/);
     expect(await screen.findByText('Total Integrations')).toBeInTheDocument();
     expect(screen.getByText('Seeded demonstration data')).toBeInTheDocument();
-    expect(screen.getByText('2 integrations need attention')).toBeInTheDocument();
+    expect(screen.getByText('PAYROLL needs attention')).toBeInTheDocument();
     expect(screen.getByText(/PAYROLL integration is unhealthy/i)).toBeInTheDocument();
-    expect(screen.getByText(/ATS integration is degraded/i)).toBeInTheDocument();
+    expect(screen.queryByText(/ATS integration is degraded/i)).not.toBeInTheDocument();
     expect(await screen.findByText('GATEWAY_TIMEOUT')).toBeInTheDocument();
     expect(screen.getByText('Latest 5 requests from Java')).toBeInTheDocument();
   });
@@ -51,6 +51,8 @@ describe('Integration Health dashboard', () => {
     expect(screen.queryByText('E_SIGN')).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'View' }));
     expect(screen.getAllByText('ATS').length).toBeGreaterThan(1);
+    expect(screen.getByText(/ATS integration is degraded/i)).toBeInTheDocument();
+    expect(screen.queryByText(/PAYROLL integration is unhealthy/i)).not.toBeInTheDocument();
   });
 
   it('shows an empty result when the integration search has no matches', async () => {
