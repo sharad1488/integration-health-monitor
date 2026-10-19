@@ -1,6 +1,7 @@
 import type { HealthResponse, IntegrationId, RequestLog, TrendsResponse } from '../types/dashboard';
-//const API_BASE = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/$/, '');
-const API_BASE = "http://localhost:8080/api/v1";
+
+// Use the same origin in development and in the Docker-served app.
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/$/, '');
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), 8000);

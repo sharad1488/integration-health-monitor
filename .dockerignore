@@ -1,0 +1,6 @@
+node_modules/
+frontend/node_modules/
+frontend/dist/
+backend-java/target/
+backend-java/.m2/
+.git/
