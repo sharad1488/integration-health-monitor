@@ -1,9 +1,11 @@
 package com.example.integrationhealth.api;
 
+import com.example.integrationhealth.config.LogIngestionScheduler;
 import com.example.integrationhealth.domain.*;
 import com.example.integrationhealth.repository.*;
 import com.example.integrationhealth.service.*;
 import jakarta.validation.constraints.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +19,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(value = "*")
 @Tag(name = "Integration health", description = "Health status, logs, trends, and sample-log ingestion")
 @Validated
+@RequiredArgsConstructor
 public class HealthController {
     private final HealthService health;
-    private final LogIngestionService ingestion;
+    private final LogIngestionScheduler ingestion;
     private final LogRepository repo;
 
-    public HealthController(HealthService h, LogIngestionService s, LogRepository r) {
-        health = h;
-        ingestion = s;
-        repo = r;
-    }
 
     @Operation(summary = "Get health for every integration", description = "Returns deterministic health status for all integrations.")
     @GetMapping("/health")
@@ -52,11 +50,11 @@ public class HealthController {
         return health.trends(integration);
     }
 
-    @Operation(summary = "Get ingestion statistics", description = "Reports in-memory accepted, malformed, and duplicate log counts.")
+   /* @Operation(summary = "Get ingestion statistics", description = "Reports in-memory accepted, malformed, and duplicate log counts.")
     @GetMapping("/ingestion/stats")
     public Map<String, Object> stats() {
         return Map.of("storedLogs", repo.size(), "malformedLines", ingestion.malformed(), "duplicateLogs", repo.duplicates(), "demonstrationData", true);
-    }
+    }*/
 
     @Operation(summary = "Reload demonstration logs", description = "Clears the in-memory snapshot and reloads configured JSON Lines files.")
     @PostMapping("/logs/reload")

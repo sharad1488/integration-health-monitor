@@ -1,12 +1,13 @@
 package com.example.integrationhealth.repository;
 
 import com.example.integrationhealth.domain.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 
-@org.springframework.stereotype.Repository
+@Repository
 public class LogRepository {
     private final Map<String, RequestLog> logs = new ConcurrentHashMap<>();
     private final LongAdder duplicates = new LongAdder();

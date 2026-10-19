@@ -10,9 +10,27 @@ app:
     directory: ${LOG_DIRECTORY:./sample-logs}
   health:
     window: ${HEALTH_WINDOW:15m}
-    minimum-sample-size: ${MINIMUM_SAMPLE_SIZE:5}
+    minimum-sample-size: ${MINIMUM_SAMPLE_SIZE:3}
     degraded-error-rate: ${DEGRADED_ERROR_RATE:0.05}
     unhealthy-error-rate: ${UNHEALTHY_ERROR_RATE:0.20}
     degraded-latency-ms: ${DEGRADED_LATENCY_MS:1000}
     unhealthy-latency-ms: ${UNHEALTHY_LATENCY_MS:3000}
     consecutive-failure-threshold: ${CONSECUTIVE_FAILURE_THRESHOLD:3}
+
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:integrationdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
