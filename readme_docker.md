@@ -49,4 +49,4 @@ To stop the optional service, use the same Ctrl+C and docker compose down steps.
 - If host port 3000 or 8080 is already in use, change the host-side port in docker-compose.yml (the number before the colon). For example, 3001:80 serves the frontend on port 3001.
 - To inspect service output, run docker compose logs -f. Use docker compose logs -f backend, frontend, or intelligence to inspect one service.
 - To rebuild after changing source or Docker configuration, run docker compose up --build again.
-- The backend keeps data in memory, so it resets when its container is recreated. No sample-log fixtures are currently tracked in this repository; a fresh run may therefore show empty or unknown health metrics until logs are ingested.
+- The backend keeps data in memory, so it resets when its container is recreated. The tracked backend-java/sample-logs/integration_log.json fixture is copied into the backend image and loaded at startup. The scheduled generator refreshes it while the service is running.

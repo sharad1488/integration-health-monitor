@@ -7,7 +7,7 @@ management:
         include: health,info
 app:
   logs:
-    directory: ${LOG_DIRECTORY:./sample-logs}
+    file: ${LOG_FILE:./sample-logs/integration_log.json}
   health:
     window: ${HEALTH_WINDOW:15m}
     minimum-sample-size: ${MINIMUM_SAMPLE_SIZE:3}

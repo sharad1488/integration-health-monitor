@@ -22,7 +22,7 @@ From the project root, open a terminal and run:
 
 The API listens on http://localhost:8080. Keep this terminal open. API documentation is at http://localhost:8080/swagger-ui/index.html.
 
-The backend stores its request data in memory. No sample-log fixtures are currently tracked in this repository, so health metrics may be empty or unknown until logs are ingested.
+The backend stores its request data in memory. The backend loads the tracked backend-java/sample-logs/integration_log.json fixture at startup. The scheduled generator refreshes that file while the service is running.
 
 ## 2. Start the frontend
 

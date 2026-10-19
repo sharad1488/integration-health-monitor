@@ -8,5 +8,6 @@ FROM eclipse-temurin:17-jre
 RUN apt-get update && apt-get install -y --no-install-recommends wget && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /workspace/target/integration-health-api-0.1.0.jar app.jar
+COPY backend-java/sample-logs ./sample-logs
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
